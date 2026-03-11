@@ -3,7 +3,7 @@ import streamlit as st
 st.title("ℹ️ About This App")
 
 st.markdown("""
-### 🎓 EduPlanner (Student Productivity Helper)
+### 🎓 GeraFocus (Student Productivity Helper)
 
 The **Student Productivity Helper** is a web application designed to
 assist students in organizing their academic activities, planning their 
