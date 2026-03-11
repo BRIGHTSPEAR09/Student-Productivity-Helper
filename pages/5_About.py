@@ -14,7 +14,7 @@ can manage their school activities and improve their study habits.
 st.divider()
 
 # ---------------- WHAT THE APP DOES ----------------
-st.header("📌 What the App Does (Use Case)")
+st.header("📌 What the App Does")
 
 st.markdown("""
 This application helps students manage their academic responsibilities by
