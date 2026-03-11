@@ -1,21 +1,13 @@
 import streamlit as st
+import pandas as pd
 import time
 from datetime import date
 
 st.title("🗓 Study Planner")
 
-# ---------------- SESSION STATE ----------------
+# Initialize session storage
 if "study_plan" not in st.session_state:
     st.session_state.study_plan = []
-
-if "timer_running" not in st.session_state:
-    st.session_state.timer_running = False
-
-if "timer_paused" not in st.session_state:
-    st.session_state.timer_paused = False
-
-if "time_left" not in st.session_state:
-    st.session_state.time_left = 0
 
 # ---------------- PLAN STUDY SESSION ----------------
 st.subheader("Plan Your Study Session")
@@ -30,6 +22,7 @@ with st.form("planner_form"):
     with col2:
         topic = st.text_input("Topic")
 
+    # MANUAL INPUT INSTEAD OF SLIDER
     duration = st.number_input("Study Duration (minutes)", min_value=1, max_value=300, value=60)
 
     study_date = st.date_input("Study Date", value=date.today())
@@ -76,50 +69,32 @@ if today_sessions:
         with col3:
 
             if not session["Completed"]:
-
                 if st.button("Start", key=f"start_{i}"):
-                    st.session_state.time_left = int(session["Duration"] * 60)
-                    st.session_state.timer_running = True
-                    st.session_state.timer_paused = False
 
-                if st.button("Pause", key=f"pause_{i}"):
-                    st.session_state.timer_paused = True
+                    total_seconds = int(session["Duration"] * 60)
 
-                if st.button("Resume", key=f"resume_{i}"):
-                    st.session_state.timer_paused = False
+                    progress_bar = st.progress(0)
+                    timer_text = st.empty()
+
+                    for seconds_left in range(total_seconds, 0, -1):
+
+                        mins, secs = divmod(seconds_left, 60)
+                        timer_text.markdown(f"⏳ **Time Left: {mins:02d}:{secs:02d}**")
+
+                        progress = (total_seconds - seconds_left) / total_seconds
+                        progress_bar.progress(progress)
+
+                        time.sleep(1)
+
+                    st.session_state.study_plan[i]["Completed"] = True
+
+                    st.success("🔔 Time's up! Study session completed!")
+                    st.balloons()
 
         with col4:
             if st.button("🗑", key=f"delete_{i}"):
                 st.session_state.study_plan.pop(i)
                 st.rerun()
-
-# ---------------- TIMER DISPLAY ----------------
-if st.session_state.timer_running:
-
-    progress_bar = st.progress(0)
-    timer_text = st.empty()
-
-    total_time = st.session_state.time_left
-
-    while st.session_state.time_left > 0:
-
-        if st.session_state.timer_paused:
-            st.warning("⏸ Timer paused")
-            break
-
-        mins, secs = divmod(st.session_state.time_left, 60)
-        timer_text.markdown(f"⏳ **Time Left: {mins:02d}:{secs:02d}**")
-
-        progress = (total_time - st.session_state.time_left) / total_time
-        progress_bar.progress(progress)
-
-        time.sleep(1)
-        st.session_state.time_left -= 1
-
-    if st.session_state.time_left == 0:
-        st.success("🔔 Time's up! Study session completed!")
-        st.balloons()
-        st.session_state.timer_running = False
 
 else:
     st.info("No study sessions planned for today.")
@@ -135,6 +110,7 @@ completed_sessions = sum(s["Completed"] for s in today_sessions)
 if total_sessions > 0:
 
     progress = completed_sessions / total_sessions
+
     st.progress(progress)
 
     st.write(f"Completed **{completed_sessions} of {total_sessions} sessions**")
