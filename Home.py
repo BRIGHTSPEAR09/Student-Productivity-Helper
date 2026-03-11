@@ -51,9 +51,6 @@ with col3:
 # Divider
 st.divider()
 
-# Call to action
-st.success("👈 Use the sidebar to navigate through the app pages!")
-
 # Optional progress demo
 st.subheader("Daily Motivation Meter")
 
@@ -63,3 +60,6 @@ st.progress(progress_value)
 
 if progress_value > 70:
     st.balloons()
+
+# Call to action
+st.success("👈 Use the sidebar to navigate through the app pages!")
