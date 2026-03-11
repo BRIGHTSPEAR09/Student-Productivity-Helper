@@ -1,58 +1,34 @@
 import streamlit as st
 
-st.set_page_config(page_title="About - Student Productivity Helper", layout="wide")
-
 st.title("ℹ️ About This App")
 
+st.header("What the App Does")
+
 st.write("""
-Welcome to **Student Productivity Helper**, your companion for managing study habits, tasks, 
-and productivity analytics in one place.
+The **Student Productivity Helper** helps students track their study habits,
+manage tasks, and analyze productivity.
 """)
 
-# Use columns for a dashboard-like feel
-col1, col2 = st.columns(2)
+st.header("Target Users")
 
-with col1:
-    st.subheader("What the App Does")
-    st.info("""
-    The **Student Productivity Helper** helps students:
-    - Track study habits
-    - Plan and manage tasks
-    - Analyze productivity trends over time
-    """)
+st.write("""
+• College students  
+• High school students  
+• Self learners
+""")
 
-with col2:
-    st.subheader("Target Users")
-    st.success("""
-    This app is designed for:
-    - College students  
-    - High school students  
-    - Self-learners who want to improve productivity
-    """)
+st.header("Inputs")
 
-st.markdown("---")  # separator
+st.markdown("""
+- Tasks entered by the user  
+- Study subjects and hours  
+- Study session plans
+""")
 
-# Inputs and Outputs in columns
-col3, col4 = st.columns(2)
+st.header("Outputs")
 
-with col3:
-    st.subheader("Inputs Collected")
-    st.write("""
-    Users can provide the following inputs:
-    - Tasks and deadlines
-    - Study subjects and allocated hours
-    - Planned study sessions
-    """)
-
-with col4:
-    st.subheader("Outputs Displayed")
-    st.write("""
-    The app generates:
-    - Productivity metrics dashboard
-    - Charts showing study trends
-    - Tables for task tracking and completion
-    """)
-
-# Optional callout
-st.markdown("---")
-st.info("This app is designed to make productivity tracking simple, visual, and actionable!")
+st.markdown("""
+- Productivity dashboard metrics  
+- Study analytics charts  
+- Task tracking tables
+""")
