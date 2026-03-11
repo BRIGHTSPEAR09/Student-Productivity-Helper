@@ -8,7 +8,7 @@ if "tasks" not in st.session_state:
 
 with st.form("task_form"):
     task = st.text_input("Task Name")
-    priority = st.selectbox("Priority", ["Low", "Medium", "High"])
+    priority = st.selectbox("Priority", ["High", "Medium", "Low"])
     deadline = st.date_input("Deadline")
 
     submitted = st.form_submit_button("Add Task")
