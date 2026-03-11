@@ -5,7 +5,7 @@ from datetime import date
 
 st.title("🗓 Study Planner")
 
-# ---------------- SESSION STATE ----------------
+# SESSION STATE
 if "study_plan" not in st.session_state:
     st.session_state.study_plan = []
 
@@ -19,7 +19,7 @@ if "current_session" not in st.session_state:
     st.session_state.current_session = None
 
 
-# ---------------- PLAN STUDY SESSION ----------------
+# PLAN STUDY SESSION 
 st.subheader("Plan Your Study Session")
 
 with st.form("planner_form"):
@@ -56,7 +56,7 @@ if submitted and subject and topic:
 
 st.divider()
 
-# ---------------- TODAY'S STUDY SESSIONS ----------------
+# TODAY'S STUDY SESSIONS
 st.subheader("📅 Today's Study Plan")
 
 today_sessions = [
@@ -125,7 +125,7 @@ if today_sessions:
 else:
     st.info("No study sessions planned for today.")
 
-# ---------------- TIMER DISPLAY ----------------
+# TIMER DISPLAY
 if (
     st.session_state.timer_running
     and st.session_state.current_session is not None
@@ -171,7 +171,7 @@ if (
 
 st.divider()
 
-# ---------------- DAILY PROGRESS ----------------
+# DAILY PROGRESS
 st.subheader("📊 Today's Progress")
 
 total_sessions = len(today_sessions)
@@ -190,7 +190,7 @@ else:
 
 st.divider()
 
-# ---------------- MOTIVATION ----------------
+# MOTIVATION
 st.subheader("💡 Motivation")
 
 quotes = [
@@ -207,7 +207,7 @@ st.info(selected_quote)
 
 st.divider()
 
-# ---------------- STUDY TIPS ----------------
+# STUDY TIPS
 st.subheader("📚 Study Tips")
 
 tips = [

@@ -8,7 +8,7 @@ st.title("📈 Study Analytics")
 if "study_data" not in st.session_state:
     st.session_state.study_data = []
 
-# ---------------- ADD STUDY RECORD ----------------
+# ADD STUDY RECORD
 st.subheader("Add Study Session")
 
 with st.form("study_form"):
@@ -34,14 +34,14 @@ if submit and subject:
 
 st.divider()
 
-# ---------------- ANALYTICS ----------------
+# ANALYTICS
 if st.session_state.study_data:
 
     df = pd.DataFrame(st.session_state.study_data)
 
     df["Date"] = pd.to_datetime(df["Date"])
 
-    # -------- METRICS --------
+    # METRICS
     total_hours = df["Hours"].sum()
     total_sessions = len(df)
     avg_hours = round(df["Hours"].mean(), 2)
@@ -57,7 +57,7 @@ if st.session_state.study_data:
 
     st.divider()
 
-    # -------- SUBJECT FILTER --------
+    # SUBJECT FILTER
     subjects = ["All"] + sorted(df["Subject"].unique().tolist())
 
     selected_subject = st.selectbox("Filter by Subject", subjects)
@@ -65,7 +65,7 @@ if st.session_state.study_data:
     if selected_subject != "All":
         df = df[df["Subject"] == selected_subject]
 
-    # -------- STUDY TREND --------
+    # STUDY TREND 
     st.subheader("📅 Study Trend Over Time")
 
     trend = df.groupby(df["Date"].dt.date)["Hours"].sum()
@@ -74,7 +74,7 @@ if st.session_state.study_data:
 
     st.divider()
 
-    # -------- SUBJECT DISTRIBUTION --------
+    # SUBJECT DISTRIBUTION
     st.subheader("📊 Study Hours by Subject")
 
     subject_chart = df.groupby("Subject")["Hours"].sum()
@@ -83,7 +83,7 @@ if st.session_state.study_data:
 
     st.divider()
 
-    # -------- DAILY STUDY HEATMAP STYLE --------
+    # DAILY STUDY HEATMAP STYLE
     st.subheader("🔥 Daily Study Activity")
 
     daily_activity = df.groupby(df["Date"].dt.date)["Hours"].sum()
@@ -92,12 +92,12 @@ if st.session_state.study_data:
 
     st.divider()
 
-    # -------- RECENT STUDY SESSIONS --------
+    # RECENT STUDY SESSIONS
     st.subheader("📋 Recent Study Sessions")
 
     st.dataframe(df.sort_values("Date", ascending=False).head(10))
 
-    # -------- STUDY INSIGHT --------
+    # STUDY INSIGHT
     st.divider()
     st.subheader("📊 Study Insights")
 

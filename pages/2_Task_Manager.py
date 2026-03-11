@@ -8,7 +8,7 @@ st.title("✅ Task Manager")
 if "tasks" not in st.session_state:
     st.session_state.tasks = []
 
-# ---------------- ADD TASK ----------------
+# ADD TASK
 st.subheader("Add New Task")
 
 with st.form("task_form"):
@@ -29,7 +29,7 @@ if submitted and task != "":
 
 st.divider()
 
-# ---------------- FILTER + SORT ----------------
+# FILTER + SORT
 col1, col2 = st.columns(2)
 
 with col1:
@@ -59,7 +59,7 @@ elif sort_option == "Priority":
     priority_order = {"High": 1, "Medium": 2, "Low": 3}
     tasks = sorted(tasks, key=lambda x: priority_order[x["Priority"]])
 
-# ---------------- DISPLAY TASKS ----------------
+# DISPLAY TASKS
 if tasks:
 
     st.subheader("Your Tasks")
@@ -112,7 +112,7 @@ if tasks:
 
     st.divider()
 
-    # ---------------- PROGRESS ----------------
+    # PROGRESS
     total_tasks = len(st.session_state.tasks)
     completed_tasks = sum(t["Completed"] for t in st.session_state.tasks)
 

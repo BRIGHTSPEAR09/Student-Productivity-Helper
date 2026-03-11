@@ -9,7 +9,7 @@ study_data = st.session_state.get("study_data", [])
 
 df = pd.DataFrame(study_data)
 
-# ---------------- METRICS ----------------
+# METRICS
 st.subheader("Overview")
 
 total_tasks = len(tasks)
@@ -28,13 +28,13 @@ col4.metric("📚 Study Sessions", study_sessions)
 
 st.divider()
 
-# ---------------- TASK COMPLETION ----------------
+# TASK COMPLETION 
 st.subheader("Task Completion")
 
 st.progress(task_completion / 100)
 st.write(f"Task completion rate: **{int(task_completion)}%**")
 
-# ---------------- STUDY GOAL ----------------
+# STUDY GOAL
 st.divider()
 
 st.subheader("🎯 Weekly Study Goal")
@@ -46,7 +46,7 @@ progress = study_hours / goal if goal else 0
 st.progress(min(progress, 1.0))
 st.write(f"Goal Progress: **{int(progress*100)}%**")
 
-# ---------------- STUDY HEATMAP ----------------
+# STUDY HEATMAP
 st.divider()
 st.subheader("📅 Study Activity (Daily Heatmap)")
 
@@ -60,7 +60,7 @@ if not df.empty and "Date" in df.columns:
 else:
     st.info("No study activity recorded yet.")
 
-# ---------------- SUBJECT DISTRIBUTION ----------------
+# SUBJECT DISTRIBUTION
 st.divider()
 st.subheader("📚 Study Subjects Distribution")
 
@@ -76,7 +76,7 @@ if not df.empty and "Subject" in df.columns:
 else:
     st.info("Add subjects in study sessions to see distribution.")
 
-# ---------------- DAILY STREAK ----------------
+# DAILY STREAK
 st.divider()
 st.subheader("🔥 Study Streak")
 
@@ -97,7 +97,7 @@ if not df.empty and "Date" in df.columns:
 
 st.metric("Current Study Streak (days)", streak)
 
-# ---------------- PRODUCTIVITY SCORE ----------------
+# PRODUCTIVITY SCORE
 st.divider()
 st.subheader("🏆 Productivity Score")
 
@@ -112,7 +112,7 @@ elif score >= 50:
 else:
     st.warning("Try to study more and complete tasks.")
 
-# ---------------- RECENT STUDY ----------------
+# RECENT STUDY
 st.divider()
 st.subheader("📋 Recent Study Sessions")
 

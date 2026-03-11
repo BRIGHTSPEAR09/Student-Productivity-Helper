@@ -13,7 +13,7 @@ can manage their school activities and improve their study habits.
 
 st.divider()
 
-# ---------------- WHAT THE APP DOES ----------------
+# WHAT THE APP DOES
 st.header("📌 What the App Does")
 
 st.markdown("""
@@ -34,7 +34,7 @@ focus and build consistent study routines.
 
 st.divider()
 
-# ---------------- TARGET USERS ----------------
+# TARGET USERS
 st.header("👥 Target Users")
 
 st.markdown("""
@@ -54,7 +54,7 @@ their study tasks and track their productivity.
 
 st.divider()
 
-# ---------------- INPUTS ----------------
+# INPUTS
 st.header("📥 Inputs Collected by the App")
 
 st.markdown("""
@@ -72,7 +72,7 @@ Examples of inputs include:
 
 st.divider()
 
-# ---------------- OUTPUTS ----------------
+# OUTPUTS
 st.header("📤 Outputs Displayed by the App")
 
 st.markdown("""
