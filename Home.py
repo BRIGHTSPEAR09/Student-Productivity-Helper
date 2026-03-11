@@ -7,13 +7,10 @@ st.set_page_config(
     layout="wide"
 )
 
-# Sidebar
 st.sidebar.success("Navigate using the pages above 👆")
 
-# ------------------------------------------------
-# Hero Section
-# ------------------------------------------------
-st.title("📚 Student Productivity Helper")
+
+st.title("📚 EduPlanner (Student Productivity Helper)")
 
 st.image(
     "https://images.unsplash.com/photo-1519389950473-47ba0277781c",
@@ -33,9 +30,6 @@ st.info("💡 *Small progress each day adds up to big results.*")
 
 st.divider()
 
-# ------------------------------------------------
-# App Features
-# ------------------------------------------------
 st.subheader("✨ App Features")
 
 col1, col2, col3 = st.columns(3)
