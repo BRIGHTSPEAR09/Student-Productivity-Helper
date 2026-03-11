@@ -32,7 +32,9 @@ with st.form("planner_form"):
     with col2:
         topic = st.text_input("Topic")
 
-    duration = st.number_input("Study Duration (minutes)", min_value=1, max_value=300, value=60)
+    duration = st.number_input(
+        "Study Duration (minutes)", min_value=1, max_value=300, value=60
+    )
 
     study_date = st.date_input("Study Date", value=date.today())
 
@@ -40,23 +42,26 @@ with st.form("planner_form"):
 
 if submitted and subject and topic:
 
-    st.session_state.study_plan.append({
-        "Subject": subject,
-        "Topic": topic,
-        "Duration": duration,
-        "Date": study_date,
-        "Completed": False
-    })
+    st.session_state.study_plan.append(
+        {
+            "Subject": subject,
+            "Topic": topic,
+            "Duration": duration,
+            "Date": study_date,
+            "Completed": False,
+        }
+    )
 
     st.success("Study session added!")
 
 st.divider()
 
-
 # ---------------- TODAY'S STUDY SESSIONS ----------------
 st.subheader("📅 Today's Study Plan")
 
-today_sessions = [s for s in st.session_state.study_plan if s["Date"] == date.today()]
+today_sessions = [
+    s for s in st.session_state.study_plan if s["Date"] == date.today()
+]
 
 if today_sessions:
 
@@ -65,7 +70,7 @@ if today_sessions:
         if session["Date"] != date.today():
             continue
 
-        col1, col2, col3, col4 = st.columns([3,2,1,1])
+        col1, col2, col3, col4 = st.columns([3, 2, 1, 1])
 
         with col1:
             if session["Completed"]:
@@ -80,8 +85,10 @@ if today_sessions:
 
             if not session["Completed"]:
 
-                # Change button label depending on timer state
-                if st.session_state.timer_running and st.session_state.current_session == i:
+                if (
+                    st.session_state.timer_running
+                    and st.session_state.current_session == i
+                ):
                     button_label = "⏸ Pause"
                 else:
                     button_label = "▶ Start"
@@ -95,7 +102,9 @@ if today_sessions:
                         st.session_state.current_session = i
 
                         if st.session_state.time_left == 0:
-                            st.session_state.time_left = int(session["Duration"] * 60)
+                            st.session_state.time_left = int(
+                                session["Duration"] * 60
+                            )
 
                     # PAUSE TIMER
                     else:
@@ -103,17 +112,29 @@ if today_sessions:
 
         with col4:
             if st.button("🗑", key=f"delete_{i}"):
+
+                # reset timer if deleting active session
+                if st.session_state.current_session == i:
+                    st.session_state.timer_running = False
+                    st.session_state.time_left = 0
+                    st.session_state.current_session = None
+
                 st.session_state.study_plan.pop(i)
                 st.rerun()
 
 else:
     st.info("No study sessions planned for today.")
 
-
 # ---------------- TIMER DISPLAY ----------------
-if st.session_state.timer_running and st.session_state.current_session is not None:
+if (
+    st.session_state.timer_running
+    and st.session_state.current_session is not None
+    and st.session_state.current_session < len(st.session_state.study_plan)
+):
 
-    session = st.session_state.study_plan[st.session_state.current_session]
+    session = st.session_state.study_plan[
+        st.session_state.current_session
+    ]
 
     total_time = int(session["Duration"] * 60)
 
@@ -133,7 +154,13 @@ if st.session_state.timer_running and st.session_state.current_session is not No
 
     if st.session_state.time_left == 0:
 
-        st.session_state.study_plan[st.session_state.current_session]["Completed"] = True
+        if (
+            st.session_state.current_session
+            < len(st.session_state.study_plan)
+        ):
+            st.session_state.study_plan[
+                st.session_state.current_session
+            ]["Completed"] = True
 
         st.success("🔔 Time's up! Study session completed!")
         st.balloons()
@@ -142,9 +169,7 @@ if st.session_state.timer_running and st.session_state.current_session is not No
         st.session_state.time_left = 0
         st.session_state.current_session = None
 
-
 st.divider()
-
 
 # ---------------- DAILY PROGRESS ----------------
 st.subheader("📊 Today's Progress")
@@ -165,7 +190,6 @@ else:
 
 st.divider()
 
-
 # ---------------- MOTIVATION ----------------
 st.subheader("💡 Motivation")
 
@@ -174,7 +198,7 @@ quotes = [
     "Consistency beats intensity.",
     "Focus on the process.",
     "Success comes from daily discipline.",
-    "Study now, relax later."
+    "Study now, relax later.",
 ]
 
 selected_quote = st.selectbox("Pick a motivation", quotes)
@@ -182,7 +206,6 @@ selected_quote = st.selectbox("Pick a motivation", quotes)
 st.info(selected_quote)
 
 st.divider()
-
 
 # ---------------- STUDY TIPS ----------------
 st.subheader("📚 Study Tips")
@@ -192,7 +215,7 @@ tips = [
     "Remove distractions while studying.",
     "Review your notes after every study session.",
     "Teach what you learned to someone else.",
-    "Study consistently instead of cramming."
+    "Study consistently instead of cramming.",
 ]
 
 st.write(tips)
