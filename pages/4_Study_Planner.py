@@ -22,7 +22,8 @@ with st.form("planner_form"):
     with col2:
         topic = st.text_input("Topic")
 
-    duration = st.slider("Study Duration (minutes)", 15, 180, 60)
+    # MANUAL INPUT INSTEAD OF SLIDER
+    duration = st.number_input("Study Duration (minutes)", min_value=1, max_value=300, value=60)
 
     study_date = st.date_input("Study Date", value=date.today())
 
@@ -51,6 +52,9 @@ if today_sessions:
 
     for i, session in enumerate(st.session_state.study_plan):
 
+        if session["Date"] != date.today():
+            continue
+
         col1, col2, col3, col4 = st.columns([3,2,1,1])
 
         with col1:
@@ -63,20 +67,28 @@ if today_sessions:
             st.write(f"{session['Duration']} mins")
 
         with col3:
+
             if not session["Completed"]:
                 if st.button("Start", key=f"start_{i}"):
 
-                    st.info("Focus time started!")
+                    total_seconds = int(session["Duration"] * 60)
 
                     progress_bar = st.progress(0)
+                    timer_text = st.empty()
 
-                    for percent in range(100):
-                        time.sleep(0.02)
-                        progress_bar.progress(percent + 1)
+                    for seconds_left in range(total_seconds, 0, -1):
+
+                        mins, secs = divmod(seconds_left, 60)
+                        timer_text.markdown(f"⏳ **Time Left: {mins:02d}:{secs:02d}**")
+
+                        progress = (total_seconds - seconds_left) / total_seconds
+                        progress_bar.progress(progress)
+
+                        time.sleep(1)
 
                     st.session_state.study_plan[i]["Completed"] = True
 
-                    st.success("🎉 Study session completed!")
+                    st.success("🔔 Time's up! Study session completed!")
                     st.balloons()
 
         with col4:
