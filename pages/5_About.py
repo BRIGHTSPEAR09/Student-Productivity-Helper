@@ -3,12 +3,13 @@ import streamlit as st
 st.title("ℹ️ About This App")
 
 st.markdown("""
-### 🎓 Student Productivity Helper
+### 🎓 EduPlanner (Student Productivity Helper)
 
-The **Student Productivity Helper** is a web application designed to help students
-organize their academic tasks, plan study sessions, and monitor their study
-productivity. The goal of this app is to provide a simple platform where students
-can manage their school activities and improve their study habits.
+The **Student Productivity Helper** is a web application designed to
+assist students in organizing their academic activities, planning their 
+studies, and monitoring their productivity in studying. The main 
+objective of this application is to create a simple tool for students
+to effectively manage their school activities and study habits.
 """)
 
 st.divider()
@@ -17,8 +18,8 @@ st.divider()
 st.header("📌 What the App Does")
 
 st.markdown("""
-This application helps students manage their academic responsibilities by
-providing tools for task management, study planning, and productivity tracking.
+This application will be useful to students as they will be able to 
+manage their academic responsibilities effectively.
 
 With this app, students can:
 
@@ -38,7 +39,7 @@ st.divider()
 st.header("👥 Target Users")
 
 st.markdown("""
-The Student Productivity Helper is designed for learners who want to improve
+This application is designed for learners who want to improve
 their study organization and productivity.
 
 The main users of the application include:
