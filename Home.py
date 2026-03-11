@@ -54,9 +54,6 @@ Organize your study schedule to stay productive and focused.
 
 st.divider()
 
-# ------------------------------------------------
-# Mood Encouragement System
-# ------------------------------------------------
 st.subheader("💬 How are you feeling today?")
 
 mood = st.selectbox(
@@ -102,9 +99,6 @@ elif mood == "😴 Tired":
 
 st.divider()
 
-# ------------------------------------------------
-# Random Productivity Tip
-# ------------------------------------------------
 st.subheader("📌 Productivity Tip")
 
 tips = [
@@ -119,7 +113,4 @@ st.info(f"💡 {random.choice(tips)}")
 
 st.divider()
 
-# ------------------------------------------------
-# Call to Action
-# ------------------------------------------------
 st.success("👈 Use the sidebar to explore the study tracker, task manager, and planner!")
