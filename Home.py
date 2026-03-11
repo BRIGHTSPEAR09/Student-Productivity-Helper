@@ -10,7 +10,7 @@ st.set_page_config(
 st.sidebar.success("Navigate using the pages above 👆")
 
 
-st.title("📚 EduPlanner (Student Productivity Helper)")
+st.title("📚 GeraFocus (Student Productivity Helper)")
 
 st.image(
     "https://images.unsplash.com/photo-1519389950473-47ba0277781c",
