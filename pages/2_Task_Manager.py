@@ -1,32 +1,33 @@
 import streamlit as st
+import pandas as pd
 
 st.title("✅ Task Manager")
 
+if "tasks" not in st.session_state:
+    st.session_state.tasks = []
+
 with st.form("task_form"):
     task = st.text_input("Task Name")
-
-    priority = st.selectbox(
-        "Priority",
-        ["Low", "Medium", "High"]
-    )
-
+    priority = st.selectbox("Priority", ["Low", "Medium", "High"])
     deadline = st.date_input("Deadline")
 
-    submit = st.form_submit_button("Add Task")
+    submitted = st.form_submit_button("Add Task")
 
-if submit:
-    st.success(f"Task '{task}' added!")
+if submitted and task != "":
+    st.session_state.tasks.append({
+        "Task": task,
+        "Priority": priority,
+        "Deadline": deadline
+    })
+    st.success("Task added!")
 
-st.subheader("Today's Task List")
+if st.session_state.tasks:
+    df = pd.DataFrame(st.session_state.tasks)
+    st.dataframe(df)
 
-tasks = [
-    {"Task":"Finish Math Homework","Priority":"High"},
-    {"Task":"Review Python","Priority":"Medium"},
-]
+    completed = st.checkbox("Mark all tasks completed")
 
-st.table(tasks)
-
-done = st.checkbox("Mark all tasks completed")
-
-if done:
-    st.balloons()
+    if completed:
+        st.balloons()
+else:
+    st.info("No tasks added yet.")

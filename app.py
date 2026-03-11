@@ -8,27 +8,15 @@ st.set_page_config(
 
 st.title("📚 Student Productivity Helper")
 
-st.sidebar.title("Navigation")
-st.sidebar.info(
-"""
-Use the pages in the sidebar to explore the app:
-
-• Dashboard  
-• Task Manager  
-• Study Analytics  
-• File Upload  
-• About
-"""
-)
+st.sidebar.success("Select a page above.")
 
 st.write("""
-Welcome to the **Student Productivity Helper App**.
+Welcome to the **Student Productivity Helper**.
 
-This tool helps students:
-- Track study hours
-- Manage tasks
-- Upload assignments
-- View productivity analytics
+This app helps students:
+
+• Track study hours  
+• Manage tasks  
+• Analyze study productivity  
+• Plan study sessions  
 """)
-
-st.success("Use the sidebar to navigate through the app.")

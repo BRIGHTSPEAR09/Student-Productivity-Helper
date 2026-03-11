@@ -1,36 +1,35 @@
 import streamlit as st
 import pandas as pd
-import numpy as np
 
 st.title("📈 Study Analytics")
 
-days = ["Mon","Tue","Wed","Thu","Fri","Sat","Sun"]
-hours = np.random.randint(1,6,7)
+if "study_data" not in st.session_state:
+    st.session_state.study_data = []
 
-data = pd.DataFrame({
-    "Day":days,
-    "Hours":hours
-})
+with st.form("study_form"):
+    subject = st.text_input("Subject")
+    hours = st.slider("Hours Studied", 1, 10)
 
-st.subheader("Weekly Study Hours")
+    submit = st.form_submit_button("Add Study Record")
 
-st.bar_chart(data.set_index("Day"))
+if submit and subject:
+    st.session_state.study_data.append({
+        "Subject": subject,
+        "Hours": hours
+    })
+    st.success("Study record added!")
 
-st.subheader("Trend")
+if st.session_state.study_data:
 
-st.line_chart(data.set_index("Day"))
+    df = pd.DataFrame(st.session_state.study_data)
 
-st.subheader("Distribution")
+    st.subheader("Study Data")
+    st.dataframe(df)
 
-st.area_chart(data.set_index("Day"))
+    st.subheader("Study Hours by Subject")
+    chart = df.groupby("Subject")["Hours"].sum()
 
-st.subheader("Raw Data")
+    st.bar_chart(chart)
 
-st.dataframe(data)
-
-option = st.multiselect(
-    "Select subjects studied",
-    ["Math","Science","Programming","History"]
-)
-
-st.write("Selected:", option)
+else:
+    st.info("No study data added yet.")

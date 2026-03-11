@@ -5,30 +5,30 @@ st.title("ℹ️ About This App")
 st.header("What the App Does")
 
 st.write("""
-The **Student Productivity Helper** helps students improve study habits
-by tracking productivity, managing tasks, and visualizing study analytics.
+The **Student Productivity Helper** helps students track their study habits,
+manage tasks, and analyze productivity.
 """)
 
 st.header("Target Users")
 
 st.write("""
-This app is designed for:
-
 • College students  
 • High school students  
-• Self-learners
+• Self learners
 """)
 
 st.header("Inputs")
 
-- Study hours
-- Tasks
-- Uploaded assignments
-- Subject selections
+st.markdown("""
+- Tasks entered by the user  
+- Study subjects and hours  
+- Study session plans
+""")
 
 st.header("Outputs")
 
-- Productivity metrics
-- Study progress bars
-- Charts showing study trends
+st.markdown("""
+- Productivity dashboard metrics  
+- Study analytics charts  
 - Task tracking tables
+""")

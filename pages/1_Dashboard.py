@@ -1,38 +1,25 @@
 import streamlit as st
 import pandas as pd
-import numpy as np
 
 st.title("📊 Productivity Dashboard")
 
-col1, col2, col3 = st.columns(3)
+tasks = st.session_state.get("tasks", [])
+study_data = st.session_state.get("study_data", [])
 
-col1.metric("Study Hours Today", "5", "+1")
-col2.metric("Tasks Completed", "7", "+2")
-col3.metric("Focus Score", "82%", "+5%")
+task_count = len(tasks)
+study_hours = sum([item["Hours"] for item in study_data]) if study_data else 0
+
+col1, col2 = st.columns(2)
+
+col1.metric("Tasks Added", task_count)
+col2.metric("Total Study Hours", study_hours)
 
 st.divider()
 
-st.subheader("Daily Study Goal")
+goal = st.slider("Set Weekly Study Goal (hours)", 1, 40, 10)
 
-goal = st.slider("Set your study goal (hours)", 1, 12, 6)
+progress = study_hours / goal if goal else 0
 
-hours = st.number_input("Hours studied today", 0, 12)
+st.progress(min(progress, 1.0))
 
-progress = hours/goal if goal else 0
-
-st.progress(progress)
-
-st.write(f"Progress: {int(progress*100)}%")
-
-st.subheader("Study Mood")
-
-mood = st.radio(
-    "How do you feel today?",
-    ["Motivated", "Okay", "Tired"]
-)
-
-st.write("Selected mood:", mood)
-
-st.subheader("Quick Notes")
-
-st.text_area("Write a quick study note")
+st.write(f"Progress toward goal: {int(progress*100)}%")
